@@ -16,11 +16,7 @@ public class QuickSortWithStrategy<T extends Comparable<T>> {
 
     public void sort(T[] items) {
         quickSort(items, 0, items.length - 1);
-        //Надо реализовать в другом месте!
-        for(T t : items){
-            System.out.println(t);
-        }
-
+        printArray(items);
     }
 
     private void quickSort(T[] items, int low, int high) {
@@ -49,5 +45,10 @@ public class QuickSortWithStrategy<T extends Comparable<T>> {
         T temp = items[i];
         items[i] = items[j];
         items[j] = temp;
+    }
+    public void printArray(T[] array) {
+        for (T element : array) {
+            System.out.println(element);
+        }
     }
 }

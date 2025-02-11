@@ -3,9 +3,6 @@ package newAstonProject;
 import newAstonProject.classes.Bus;
 import newAstonProject.comparators.BusComporators;
 import newAstonProject.comparators.CompositeComparator;
-import org.w3c.dom.ls.LSOutput;
-
-import java.util.Scanner;
 
 import static newAstonProject.InputScanner.*;
 
@@ -18,79 +15,103 @@ public class ForBus {
     }
 
     private static void processBuses(Bus[] buses) {
-        System.out.println("Ваш выбор: 1 - быстрая сортировка, 2 - кастомная сортировка, 3 - бинарный поиск");
-        int choice = scanner.nextInt();
-        switch (choice) {
-            case 1:
-                QuickSortWithStrategy<Bus> busQuickSortWithStrategy = new QuickSortWithStrategy<>
-                        (new CompositeComparator<>(
-                                new BusComporators.SortByNumber(),
-                                new BusComporators.SortByModel(),
-                                new BusComporators.SortByMileage()
-                        ));
-                busQuickSortWithStrategy.sort(buses);
-                break;
-            case 2:
-                chooseCustomSort(buses);
-                break;
-            case 3:
-                busBinarySearch(buses);
-                break;
-            default:
-                System.out.println("Неверный выбор");
-                break;
+        while (true) {
+            System.out.println("Ваш выбор:\n" +
+                    "1.  Быстрая сортировка\n" +
+                    "2.  Кастомная сортировка\n" +
+                    "3.  Бинарный поиск\n" +
+                    "0.  Выход.");
+            int choice = InputScanner.getIntInput("Сделайте ваш выбор: ");
+            switch (choice) {
+                case 0:
+                    return;
+                case 1:
+                    QuickSortWithStrategy<Bus> busQuickSortWithStrategy = new QuickSortWithStrategy<>
+                            (new CompositeComparator<>(
+                                    new BusComporators.SortByNumber(),
+                                    new BusComporators.SortByModel(),
+                                    new BusComporators.SortByMileage()
+                            ));
+                    busQuickSortWithStrategy.sort(buses);
+                    break;
+                case 2:
+                    chooseCustomSort(buses);
+                    break;
+                case 3:
+                    busBinarySearch(buses);
+                    break;
+                default:
+                    System.out.println("Неверный выбор");
+                    break;
+            }
         }
     }
 
     private static void busBinarySearch(Bus[] buses) {
-
+        QuickSortWithStrategy<Bus> busQuickSortWithStrategy = new QuickSortWithStrategy<>
+                (new CompositeComparator<>(
+                        new BusComporators.SortByNumber(),
+                        new BusComporators.SortByModel(),
+                        new BusComporators.SortByMileage()
+                ));
+        busQuickSortWithStrategy.sort(buses);
+        SearchService<Bus> searchService = new SearchService<>();
+        searchService.printSearchResult(buses, getSearchKey());
     }
 
     private static void chooseCustomSort(Bus[] buses) {
-        System.out.println("Выберите по каким параметрам сортировать (можно несколько до 2 параметров):\n" +
-                "По номеру автобуса - 1, по модели - 2, по пробегу - 3");
-        int choice = InputScanner.getIntInput("Сделайте ваш выбор: ");
+        while (true) {
+            System.out.println("Выберите по каким параметрам сортировать (можно несколько до 2 параметров):\n" +
+                    "1.  По номеру автобуса\n" +
+                    "2.  По модели\n" +
+                    "3.  По пробегу\n" +
+                    "0.  Выход");
+            int choice = InputScanner.getIntInput("Сделайте ваш выбор: ");
 
-        switch (choice) {
-            case 1:
-                new QuickSortWithStrategy<>(new CompositeComparator<>(
-                        new BusComporators.SortByNumber())).sort(buses);
-                break;
-            case 2:
-                new QuickSortWithStrategy<>(new CompositeComparator<>(
-                        new BusComporators.SortByModel())).sort(buses);
-                break;
-            case 3:
-                new QuickSortWithStrategy<>(new CompositeComparator<>(
-                        new BusComporators.SortByMileage())).sort(buses);
-                break;
-            case 12:
-                new QuickSortWithStrategy<>(new CompositeComparator<>(
-                        new BusComporators.SortByNumber(), new BusComporators.SortByNumber())).sort(buses);
-                break;
-            case 13:
-                new QuickSortWithStrategy<>(new CompositeComparator<>(
-                        new BusComporators.SortByNumber(), new BusComporators.SortByMileage())).sort(buses);
-                break;
-            case 21:
-                new QuickSortWithStrategy<>(new CompositeComparator<>(
-                        new BusComporators.SortByModel(), new BusComporators.SortByNumber())).sort(buses);
-                break;
-            case 23:
-                new QuickSortWithStrategy<>(new CompositeComparator<>(
-                        new BusComporators.SortByModel(), new BusComporators.SortByMileage())).sort(buses);
-                break;
-            case 31:
-                new QuickSortWithStrategy<>(new CompositeComparator<>(
-                        new BusComporators.SortByMileage(), new BusComporators.SortByNumber())).sort(buses);
-                break;
-            case 32:
-                new QuickSortWithStrategy<>(new CompositeComparator<>(
-                        new BusComporators.SortByMileage(), new BusComporators.SortByModel())).sort(buses);
-                break;
-            default:
-                System.out.println("Неверный выбор");
-                break;
+            switch (choice) {
+                case 0:
+                    return;
+                case 1:
+                    new QuickSortWithStrategy<>(new CompositeComparator<>(
+                            new BusComporators.SortByNumber())).sort(buses);
+                    break;
+                case 2:
+                    new QuickSortWithStrategy<>(new CompositeComparator<>(
+                            new BusComporators.SortByModel())).sort(buses);
+                    break;
+                case 3:
+                    new QuickSortWithStrategy<>(new CompositeComparator<>(
+                            new BusComporators.SortByMileage())).sort(buses);
+                    break;
+                case 12:
+                    new QuickSortWithStrategy<>(new CompositeComparator<>(
+                            new BusComporators.SortByNumber(), new BusComporators.SortByNumber())).sort(buses);
+                    break;
+                case 13:
+                    new QuickSortWithStrategy<>(new CompositeComparator<>(
+                            new BusComporators.SortByNumber(), new BusComporators.SortByMileage())).sort(buses);
+                    break;
+                case 21:
+                    new QuickSortWithStrategy<>(new CompositeComparator<>(
+                            new BusComporators.SortByModel(), new BusComporators.SortByNumber())).sort(buses);
+                    break;
+                case 23:
+                    new QuickSortWithStrategy<>(new CompositeComparator<>(
+                            new BusComporators.SortByModel(), new BusComporators.SortByMileage())).sort(buses);
+                    break;
+                case 31:
+                    new QuickSortWithStrategy<>(new CompositeComparator<>(
+                            new BusComporators.SortByMileage(), new BusComporators.SortByNumber())).sort(buses);
+                    break;
+                case 32:
+                    new QuickSortWithStrategy<>(new CompositeComparator<>(
+                            new BusComporators.SortByMileage(), new BusComporators.SortByModel())).sort(buses);
+                    break;
+
+                default:
+                    System.out.println("Неверный выбор");
+                    break;
+            }
         }
     }
 
@@ -123,29 +144,35 @@ public class ForBus {
     }
 
     static Bus[] createBusArray() {
-        System.out.println("Выберите способ заполнения массива:");
-        System.out.println("1. Случайно");
-        System.out.println("2. Вручную");
-        System.out.println("3. Из файла");
-        System.out.println("Ваш выбор: ");
-        int choice = scanner.nextInt();
-        System.out.println("Введите размер массива: ");
-        int size = scanner.nextInt();
-        Bus[] buses = new Bus[size];
-        switch (choice) {
-            case 1:
-                fillArrayRandomly(buses);
-                break;
-            case 2:
-                fillArrayManually(buses);
-                break;
-            case 3:
-                fillArrayFromFile(buses);
-                break;
-            default:
-                System.out.println("Неверный выбор. Заполняем случайно.");
-                fillArrayRandomly(buses);
+        while (true) {
+            System.out.println("Выберите способ заполнения массива:");
+            System.out.println("1. Случайно");
+            System.out.println("2. Вручную");
+            System.out.println("3. Из файла");
+            System.out.println("Ваш выбор: ");
+            int choice = InputScanner.getIntInput("Сделайте ваш выбор: ");
+            int size = InputScanner.getIntInput("Введите размер массива: ");
+            Bus[] buses = new Bus[size];
+            switch (choice) {
+                case 1:
+                    fillArrayRandomly(buses);
+                    break;
+                case 2:
+                    fillArrayManually(buses);
+                    break;
+                case 3:
+                    fillArrayFromFile(buses);
+                    break;
+                default:
+                    System.out.println("Неверный выбор. Заполняем случайно.");
+                    fillArrayRandomly(buses);
+            }
+            return buses;
         }
-        return buses;
     }
+
+    private static String getSearchKey() {
+        return getStringInput("Введите номер автобуса для поиска: ");
+    }
+
 }

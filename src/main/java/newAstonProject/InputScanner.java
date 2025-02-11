@@ -35,7 +35,7 @@ public class InputScanner {
     public static boolean isPositiveInteger(String input) {
         try {
             int value = Integer.parseInt(input);
-            return value > 0;
+            return value >= 0;
         } catch (NumberFormatException e) {
             return false;
         }
