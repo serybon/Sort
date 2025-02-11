@@ -5,10 +5,10 @@ public class Bus implements Comparable<Bus>{
     private final String model;
     private final int mileage;
 
-    private Bus(Builder builder) {
-        this.number = builder.number;
-        this.model = builder.model;
-        this.mileage = builder.mileage;
+    private Bus(BusBuilder busBuilder) {
+        this.number = busBuilder.number;
+        this.model = busBuilder.model;
+        this.mileage = busBuilder.mileage;
     }
 
     public String getNumber() {
@@ -25,22 +25,22 @@ public class Bus implements Comparable<Bus>{
 
 
 
-    public static class Builder {
+    public static class BusBuilder {
         private String number;
         private String model;
         private int mileage;
 
-        public Builder setNumber(String number) {
+        public BusBuilder setNumber(String number) {
             this.number = number;
             return this;
         }
 
-        public Builder setModel(String model) {
+        public BusBuilder setModel(String model) {
             this.model = model;
             return this;
         }
 
-        public Builder setMileage(int mileage) {
+        public BusBuilder setMileage(int mileage) {
             this.mileage = mileage;
             return this;
         }
@@ -64,10 +64,6 @@ public class Bus implements Comparable<Bus>{
 
     @Override
     public String toString() {
-        return "Bus{" +
-                "number=" + number +
-                ", model='" + model + '\'' +
-                ", mileage=" + mileage +
-                '}';
+        return String.format("Bus [ number: %-10s model: %-10s mileage: %-7d ]", number, model, mileage);
     }
 }

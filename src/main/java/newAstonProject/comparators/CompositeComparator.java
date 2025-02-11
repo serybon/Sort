@@ -1,7 +1,7 @@
 package newAstonProject.comparators;
 
 
-public class CompositeComparator<T> implements ComparatorStrategy<T> {
+public class CompositeComparator<T extends Comparable<T>> implements ComparatorStrategy<T> {
     private ComparatorStrategy<T>[] strategies;
 
         public CompositeComparator(ComparatorStrategy<T>... strategies) {

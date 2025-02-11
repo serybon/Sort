@@ -5,10 +5,10 @@ public class User implements Comparable<User> {
     private final String password;
     private final String email;
 
-    private User(Builder builder) {
-        this.name = builder.name;
-        this.password = builder.password;
-        this.email = builder.email;
+    private User(UserBuilder userBuilder) {
+        this.name = userBuilder.name;
+        this.password = userBuilder.password;
+        this.email = userBuilder.email;
     }
 
     public String getName() {
@@ -23,22 +23,22 @@ public class User implements Comparable<User> {
         return password;
     }
 
-    public static class Builder {
+    public static class UserBuilder {
         private String name;
         private String password;
         private String email;
 
-        public Builder setName(String name) {
+        public UserBuilder setName(String name) {
             this.name = name;
             return this;
         }
 
-        public Builder setPassword(String password) {
+        public UserBuilder setPassword(String password) {
             this.password = password;
             return this;
         }
 
-        public Builder setEmail(String email) {
+        public UserBuilder setEmail(String email) {
             this.email = email;
             return this;
         }
@@ -62,10 +62,6 @@ public class User implements Comparable<User> {
 
     @Override
     public String toString() {
-        return "User{" +
-                "name='" + name + '\'' +
-                ", password='" + password + '\'' +
-                ", email='" + email + '\'' +
-                '}';
+        return String.format("User [ name: %-10s password: %-10s email: %-10s ]", name, password, email);
     }
 }

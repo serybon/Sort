@@ -5,10 +5,10 @@ public class Student implements Comparable<Student> {
     private final double averageScore;
     private final String recordBookNumber;
 
-    private Student(Builder builder) {
-        this.groupNumber = builder.groupNumber;
-        this.averageScore = builder.averageScore;
-        this.recordBookNumber = builder.recordBookNumber;
+    private Student(StudentBuilder studentBuilder) {
+        this.groupNumber = studentBuilder.groupNumber;
+        this.averageScore = studentBuilder.averageScore;
+        this.recordBookNumber = studentBuilder.recordBookNumber;
     }
 
     public Student(String groupNumber, double averageScore, String recordBookNumber) {
@@ -29,22 +29,22 @@ public class Student implements Comparable<Student> {
         return recordBookNumber;
     }
 
-    public static class Builder {
+    public static class StudentBuilder {
         private String groupNumber;
         private double averageScore;
         private String recordBookNumber;
 
-        public Builder setGroupNumber(String groupNumber) {
+        public StudentBuilder setGroupNumber(String groupNumber) {
             this.groupNumber = groupNumber;
             return this;
         }
 
-        public Builder setAverageScore(double averageScore) {
+        public StudentBuilder setAverageScore(double averageScore) {
             this.averageScore = averageScore;
             return this;
         }
 
-        public Builder setRecordBookNumber(String recordBookNumber) {
+        public StudentBuilder setRecordBookNumber(String recordBookNumber) {
             this.recordBookNumber = recordBookNumber;
             return this;
         }
@@ -64,5 +64,10 @@ public class Student implements Comparable<Student> {
             }
         }
         return result;
+    }
+    @Override
+    public String toString() {
+        return String.format("Student [ groupNumber: %-4s averageScore: %-5.2f recordBookNumber: %-5s ]"
+                , groupNumber, averageScore, recordBookNumber);
     }
 }
